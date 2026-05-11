@@ -1,13 +1,11 @@
-from itertools import combinations
-
 import networkx as nx
 import sympy as sp
 
 from .path_finder import (
     find_forward_paths,
     find_loops,
+    find_non_touching_loop_groups,
     loop_gain,
-    loops_are_non_touching,
     path_gain,
 )
 
@@ -22,18 +20,11 @@ def _compute_delta(graph: nx.DiGraph, loops: list[list[str]]) -> sp.Expr:
 
     for k in range(1, len(loops) + 1):
         combo_sum = sp.Integer(0)
-        for combo in combinations(loops, k):
-            valid = True
-            for i in range(len(combo)):
-                for j in range(i + 1, len(combo)):
-                    if not loops_are_non_touching(combo[i], combo[j]):
-                        valid = False
-                        break
-                if not valid:
-                    break
-            if not valid:
-                continue
-
+        if k == 1:
+            combos = [(loop,) for loop in loops]
+        else:
+            combos = find_non_touching_loop_groups(loops, k)
+        for combo in combos:
             product = sp.Integer(1)
             for loop in combo:
                 product *= loop_gain_map[tuple(loop)]
@@ -76,7 +67,7 @@ def compute_mason_transfer_function(
     delta = _compute_delta(graph, loops)
 
     if delta == 0:
-        raise ValueError("Graph determinant Δ is zero; transfer function is undefined.")
+        raise ValueError("Graph determinant (Delta/Δ) is zero; transfer function is undefined.")
 
     numerator = sp.Integer(0)
     path_deltas: list[sp.Expr] = []

@@ -4,6 +4,7 @@ from tkinter import filedialog, messagebox
 
 from .block_diagram import parse_block_diagram
 from .mason import compute_mason_transfer_function
+from .path_finder import format_loop_display
 from .sfg_graph import build_sfg_graph
 
 
@@ -56,8 +57,12 @@ class SFGGui(tk.Tk):
             ):
                 self.output_text.insert(tk.END, f"P{i}: {' -> '.join(p)} | gain={g}\n")
             self.output_text.insert(tk.END, "\nLoops:\n")
-            for i, (l, g) in enumerate(zip(result["loops"], result["loop_gains"]), start=1):
-                self.output_text.insert(tk.END, f"L{i}: {' -> '.join(l)} -> {l[0]} | gain={g}\n")
+            for i, (loop, gain) in enumerate(
+                zip(result["loops"], result["loop_gains"]), start=1
+            ):
+                self.output_text.insert(
+                    tk.END, f"L{i}: {format_loop_display(loop)} | gain={gain}\n"
+                )
         except Exception as exc:
             messagebox.showerror("Error", str(exc))
 

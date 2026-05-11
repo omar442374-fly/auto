@@ -28,8 +28,16 @@ def find_loops(graph: nx.DiGraph) -> list[list[str]]:
     return [list(cycle) for cycle in nx.simple_cycles(graph)]
 
 
-def loops_are_non_touching(loop_a: list[str], loop_b: list[str]) -> bool:
+def are_loops_non_touching(loop_a: list[str], loop_b: list[str]) -> bool:
     return set(loop_a).isdisjoint(loop_b)
+
+
+def all_loops_non_touching(loop_group: tuple[list[str], ...]) -> bool:
+    for i in range(len(loop_group)):
+        for j in range(i + 1, len(loop_group)):
+            if not are_loops_non_touching(loop_group[i], loop_group[j]):
+                return False
+    return True
 
 
 def find_non_touching_loop_groups(
@@ -37,14 +45,10 @@ def find_non_touching_loop_groups(
 ) -> list[tuple[list[str], ...]]:
     groups: list[tuple[list[str], ...]] = []
     for candidate in combinations(loops, group_size):
-        all_non_touching = True
-        for i in range(len(candidate)):
-            for j in range(i + 1, len(candidate)):
-                if not loops_are_non_touching(candidate[i], candidate[j]):
-                    all_non_touching = False
-                    break
-            if not all_non_touching:
-                break
-        if all_non_touching:
+        if all_loops_non_touching(candidate):
             groups.append(candidate)
     return groups
+
+
+def format_loop_display(loop: list[str]) -> str:
+    return f"{' -> '.join(loop)} -> {loop[0]}"

@@ -2,6 +2,7 @@ import argparse
 
 from .block_diagram import load_block_diagram_json
 from .mason import compute_mason_transfer_function
+from .path_finder import format_loop_display
 from .sfg_graph import build_sfg_graph
 from .visualizer import draw_sfg
 
@@ -15,7 +16,7 @@ def _print_result(result: dict[str, object]) -> None:
 
     print("\nLoops:")
     for i, (loop, gain) in enumerate(zip(result["loops"], result["loop_gains"]), start=1):
-        print(f"  L{i}: {' -> '.join(loop)} -> {loop[0]} | Gain: {gain}")
+        print(f"  L{i}: {format_loop_display(loop)} | Gain: {gain}")
 
     print(f"\nΔ (Graph Determinant): {result['delta']}")
     for i, delta_k in enumerate(result["path_deltas"], start=1):
