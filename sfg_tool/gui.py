@@ -65,4 +65,3 @@ class SFGGui(tk.Tk):
 def run_gui() -> None:
     app = SFGGui()
     app.mainloop()
-

@@ -55,4 +55,3 @@ def load_block_diagram_json(path: str | Path) -> BlockDiagram:
     with file_path.open("r", encoding="utf-8") as file:
         data = json.load(file)
     return parse_block_diagram(data)
-

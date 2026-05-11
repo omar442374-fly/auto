@@ -49,4 +49,3 @@ def find_non_touching_loop_groups(
         if all_non_touching:
             groups.append(candidate)
     return groups
-

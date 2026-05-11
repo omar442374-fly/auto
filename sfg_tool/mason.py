@@ -97,4 +97,3 @@ def compute_mason_transfer_function(
         "path_deltas": path_deltas,
         "transfer_function": transfer_function,
     }
-

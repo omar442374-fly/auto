@@ -29,4 +29,3 @@ def build_sfg_graph(diagram: BlockDiagram) -> nx.DiGraph:
     for from_node, to_node, gain in diagram.edges:
         sfg.add_branch(from_node, to_node, gain)
     return sfg.get_graph()
-

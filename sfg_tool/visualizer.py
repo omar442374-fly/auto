@@ -33,4 +33,3 @@ def draw_sfg(
         plt.show()
 
     plt.close()
-
