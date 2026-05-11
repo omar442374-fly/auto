@@ -17,7 +17,7 @@ class TestMason(unittest.TestCase):
                     ["e", "x", "G1"],
                     ["x", "c", "G2"],
                     ["c", "e", "-H1"],
-                    ["x", "e", "-H2"],
+                    ["c", "x", "-H2"],
                 ],
                 "source": "r",
                 "sink": "c",
@@ -45,4 +45,3 @@ class TestMason(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -8,7 +8,7 @@ Simple Python project for:
 ## Folder Structure
 
 ```
-/home/runner/work/auto/auto/
+project_root/
 ├── sfg_tool/
 │   ├── __init__.py
 │   ├── block_diagram.py
@@ -36,16 +36,16 @@ pip install networkx matplotlib sympy
 ## Run CLI
 
 ```bash
-cd /home/runner/work/auto/auto
-python3 -m sfg_tool.main --input /home/runner/work/auto/auto/examples/example1.json
+cd project_root
+python3 -m sfg_tool.main --input examples/example1.json
 ```
 
 Save graph image:
 
 ```bash
 python3 -m sfg_tool.main \
-  --input /home/runner/work/auto/auto/examples/example1.json \
-  --save-figure /home/runner/work/auto/auto/examples/example1.png
+  --input examples/example1.json \
+  --save-figure examples/example1.png
 ```
 
 ## Run GUI (optional)
@@ -57,6 +57,6 @@ python3 -c "from sfg_tool.gui import run_gui; run_gui()"
 ## Run Tests
 
 ```bash
-cd /home/runner/work/auto/auto
+cd project_root
 python3 -m unittest discover -s tests -q
 ```
