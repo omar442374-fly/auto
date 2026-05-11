@@ -63,7 +63,7 @@ def compute_mason_transfer_function(
         }
 
     path_gains = [path_gain(graph, p) for p in forward_paths]
-    loop_gains = [loop_gain(graph, l) for l in loops]
+    loop_gains = [loop_gain(graph, loop) for loop in loops]
     delta = _compute_delta(graph, loops)
 
     if delta == 0:

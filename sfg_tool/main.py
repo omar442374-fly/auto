@@ -32,7 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--input", required=True, help="Path to input JSON file")
     parser.add_argument("--save-figure", default=None, help="Optional output image path")
     parser.add_argument(
-        "--show-figure", action="store_true", help="Show graph window using Matplotlib"
+        "--show-figure", action="store_true", help="Show graph window using matplotlib"
     )
     return parser.parse_args()
 

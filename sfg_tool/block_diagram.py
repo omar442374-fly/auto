@@ -17,7 +17,7 @@ class BlockDiagram:
 def _parse_edge(raw_edge: Iterable[str]) -> tuple[str, str, sp.Expr]:
     try:
         from_node, to_node, gain = raw_edge
-    except Exception as exc:  # pragma: no cover - defensive for bad input shape
+    except (TypeError, ValueError) as exc:  # pragma: no cover - defensive for bad input shape
         raise ValueError(f"Edge must be [from, to, gain], got: {raw_edge}") from exc
     return str(from_node), str(to_node), sp.sympify(gain)
 
