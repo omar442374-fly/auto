@@ -75,7 +75,7 @@ def compute_mason_transfer_function(
     loop_gains = [loop_gain(graph, l) for l in loops]
     delta = _compute_delta(graph, loops)
 
-    if sp.simplify(delta) == 0:
+    if delta == 0:
         raise ValueError("Graph determinant Δ is zero; transfer function is undefined.")
 
     numerator = sp.Integer(0)

@@ -13,9 +13,8 @@ def path_gain(graph: nx.DiGraph, path: list[str]) -> sp.Expr:
 
 def loop_gain(graph: nx.DiGraph, loop: list[str]) -> sp.Expr:
     gain = sp.Integer(1)
-    closed_loop = loop + [loop[0]]
-    for i in range(len(closed_loop) - 1):
-        gain *= graph[closed_loop[i]][closed_loop[i + 1]]["gain"]
+    for i in range(len(loop)):
+        gain *= graph[loop[i]][loop[(i + 1) % len(loop)]]["gain"]
     return sp.simplify(gain)
 
 
