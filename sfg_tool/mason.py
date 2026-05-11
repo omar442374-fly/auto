@@ -67,7 +67,7 @@ def compute_mason_transfer_function(
     delta = _compute_delta(graph, loops)
 
     if delta == 0:
-        raise ValueError("Graph determinant (Delta/Δ) is zero; transfer function is undefined.")
+        raise ValueError("Graph determinant (Delta) is zero; transfer function is undefined.")
 
     numerator = sp.Integer(0)
     path_deltas: list[sp.Expr] = []

@@ -9,8 +9,9 @@ def draw_sfg(
     title: str = "Signal Flow Graph",
     save_path: str | None = None,
     show: bool = False,
+    figsize: tuple[int, int] = (8, 6),
 ) -> None:
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=figsize)
     pos = nx.spring_layout(graph, seed=42)
 
     nx.draw_networkx_nodes(graph, pos, node_size=1200, node_color="#dbeafe")
